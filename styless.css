@@ -1,1 +1,50 @@
 
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+
+
+h1 {
+    margin-top: 10px;
+}
+
+main {
+    padding: 20px;
+}
+
+
+article {
+    margin-bottom: 40px;
+}
+
+h2 {
+    color: #333;
+    border-bottom: 2px solid #333;
+    padding-bottom: 5px;
+}
+
+
+
+li {
+    margin-bottom: 5px;
+}
+
+li strong {
+    font-weight: bold;
+}
+
+video {
+    display: block;
+    margin: 20px auto;
+}
