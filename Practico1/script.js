@@ -9,7 +9,7 @@ function calculadora() {
         alert("Error: Ingrese valores numéricos válidos en ambos campos.");
         return;
     }
-// elige la opcion de la operacion
+    // elige la opcion de la operacion
     switch (operation) {
         case "suma":
             result = num1 + num2;
@@ -32,7 +32,7 @@ function calculadora() {
     }
     
     // Validar el resultado si es demadiado grande  9999999999999
-    if (result > 9999999999999 || result<9999999999999) {
+    if (result > 9999999999999) {
         alert("Error: El resultado es demasiado grande. Intente con valores más pequeños.");
         return;
     }
