@@ -1,0 +1,135 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f7d867; /* Fondo amarillo */
+    transition: background-color 0.5s;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff; /* Fondo blanco */
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+h1 {
+    color: #e74c3c; /* Texto rojo */
+}
+
+label {
+    font-weight: bold;
+    color: #3498db; /* Texto azul */
+}
+
+input {
+    padding: 5px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: #3498db; /* Borde azul al enfocar */
+}
+
+#game-options {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+#game-options img {
+    width: 100px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+#game-options img:hover {
+    transform: scale(1.1); /* Escalar al hacer hover */
+}
+
+#results {
+    margin-top: 20px;
+}
+
+#round-result {
+    font-weight: bold;
+    color: #e74c3c; /* Texto rojo */
+}
+
+#player-score {
+    color: #2ecc71; /* Texto verde */
+}
+
+#computer-score {
+    color: #2ecc71; /* Texto verde */
+}
+
+#winner-message {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #f39c12; /* Texto naranja */
+}
+
+#restart-button {
+    padding: 10px 20px;
+    background-color: #3498db; /* Fondo azul */
+    color: #ffffff; /* Texto blanco */
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#restart-button:hover {
+    background-color: #e74c3c; /* Cambio de color al hacer hover */
+}
+
+#restart-button:focus {
+    background-color: #2ecc71; /* Cambio de color al enfocar */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* ... (código CSS anterior) ... */
+
+/* ... (código CSS anterior) ... */
+
+/* Estilo para centrar el botón de inicio horizontalmente */
+#player-input {
+    text-align: center; /* Centrar horizontalmente el contenido dentro del contenedor */
+}
+
+#start-button {
+    padding: 10px 20px;
+    background-color: #3498db; /* Fondo azul */
+    color: #ffffff; /* Texto blanco */
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
+}
+
+/* ... (código CSS restante) ... */
+
+
+#start-button:hover {
+    background-color: #e74c3c; /* Cambio de color al hacer hover */
+    transform: scale(1.05); /* Escalar un poco al hacer hover */
+}
+
+#start-button:focus {
+    background-color: #2ecc71; /* Cambio de color al enfocar */
+    transform: scale(1.1); /* Escalar más al enfocar */
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
+}
+
+/* ... (resto del código CSS) ... */

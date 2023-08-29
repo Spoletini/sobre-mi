@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles2.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Josefin+Sans&display=swap"
+        rel="stylesheet">
+
+    <title>Batalla Piedra, Papel o Tijeras</title>
+</head>
+
+<body>
+    <div>
+        <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu nombre ">
+        <button id="enviarNombre" type="button" onclick="usuario=mostrarNombreUsuario()">Enviar</button>
+    </div>
+
+    <div id="marcador">
+        <div class="cajasmarcador">
+            <h4 id="nUsuario" class="nUsuario">Usuario</h4>
+            <h3 id="marcador1" class="nUsuario">0</h3>
+        </div>
+        <div class="cajasmarcador1">
+            <h5 id="nRound" class="nUsuario">Round </h5>
+            <h6 id="marcador2" class="nUsuario">0</h6>
+        </div>
+        <div class="cajasmarcador">
+            <h4 id="nComputadora" class="nUsuario">Computadora</h4>
+            <h3 id="marcador3" class="nUsuario">0</h3>
+        </div>
+    </div>
+
+    <div id="principal">
+        <div>
+            <h3 id="parrafo1"> Para iniciar el juego, primero complete su nombre</h3>
+        </div>
+
+        <div id="displayMensaje">
+            <h5 id="parrafo2">El juego es al mejor de 5 enfrentamientos. ¡Suerte! </h5>
+        </div>
+        <hr color="red">
+
+        <Div id="botones">
+            <button class="botones" id="piedra" disabled value="piedra"><img src="Recursos/Piedra.png" width="70px"
+                    alt=" icono piedra" onclick="obtenerJugadaUsuario('piedra')"></button>
+            <button class="botones" disabled id="papel" value="papel"><img src="Recursos/papel.png" width="70px"
+                    alt="icono papel" onclick="obtenerJugadaUsuario('papel')"></button>
+            <button class="botones" id="tijera" disabled value="tijera"><img src="Recursos/Tijera.png" width="70px"
+                    alt="icono tijeras" onclick="obtenerJugadaUsuario('tijera')"></button>
+        </Div>
+
+        <Div>
+            <button id="bjugar" disabled onclick="ganador=determinarGanador(valorPc,valorUsuario)">Jugar</button>
+        </Div>
+
+        <div id="displayEleccion">
+            <div class="inline" id="cajaUsuario">
+                <div id="imagenEleccionJugador" class="cajaEleccion"> </div>
+                <p id="textoEleccionJugador"> Elección jugador</p>
+            </div>
+
+            <div class="inline" id="cajaPC">
+                <div id="imagenEleccionPC" class="cajaEleccion"> </div>
+                <p id="textoEleccionPC"> Elección Computadora</p>
+            </div>
+        </div>
+
+        <div id="BotonReinicio">
+            <button id="bReinicio" disabled> Reiniciar </button>
+        </div>
+    </div>
+
+    <script src="script2js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,314 @@
+console.log("Bienvenido  A Jugar!")
+
+////////////// definicion de variables y constantes globales ////////////////
+const PIEDRA = "piedra"
+const PAPEL = "papel"
+const TIJERA = "tijera"
+let contadorRound = 0
+let valorUsuario
+let valorPc
+let contadorPartidosPC = 0
+let contadorPartidosUsuario = 0
+let ganador
+let cantidadDePartidos
+let usuario
+let nombreNoValido = "No válido"
+
+
+/////// funciones utilizadas ////
+
+// funcion de ingreso de nombre de usuario con validacion //
+function mostrarNombreUsuario() {
+    var usuario = document.getElementById("usuario").value;
+    if (usuario.trim() === "") {
+        alert("Por favor, ingresa un nombre de usuario válido."); // validacion campo vacio //                        
+        return nombreNoValido;
+    } else if ((usuario.length > 20)) {
+        alert("Nombre muy largo, ingresa un nombre con menos de 12 letras."); //validacion nombre muy largo //
+        return nombreNoValido;
+    } else {
+        return usuario;
+    }
+}
+
+//sonidos// 
+// Crea objetos de Audio 
+const clickJugar = new Audio();
+const clickSeleccion = new Audio();
+const sonidoGana = new Audio();
+const sonidoEmpate = new Audio();
+const sonidoPierde= new Audio();
+const sonidoGanador = new Audio();
+const sonidoPerdedor = new Audio();
+const sonidoFinish = new Audio();
+const sonidovictory = new Audio();
+
+// Carga los archivos de sonido en los objetos de Audio//
+sonidoGana.src = "./Recursos/gana.mp3"; // sonidoGana.play();
+sonidoGana.type = "audio/mpeg";
+sonidoEmpate.src = "./Recursos/empate.mp3"; // sonidoEmpate.play();
+sonidoEmpate.type = "audio/mpeg";
+sonidoPierde.src = "./Recursos/pierde.mp3"; // sonidoPierde.play();
+sonidoPierde.type = "audio/mpeg";
+sonidoGanador.src = "./Recursos/aplausos.mp3"; // sonidoGanador.play();
+sonidoGanador.type = "audio/mpeg";
+sonidoPerdedor.src = "./Recursos/gameover.mp3"; // sonidoPerdedor.play();
+sonidoPerdedor.type = "audio/mpeg";
+sonidoFinish.src = "./Recursos/finish.mp3"; // sonidoFinish.play();
+sonidoFinish.type = "audio/mpeg";
+sonidovictory.src = "./Recursos/victory.mp3"; // sonidovictory.play();
+sonidovictory.type = "audio/mpeg";
+
+//funcion nº aleatorio //
+function numeroAleatorio() {
+    numero = Math.floor(Math.random() * 3);
+    return numero
+}
+// funcion obtenerJugadaComputadora() // usa funcion aleatorio    
+function obtenerJugadaComputadora() {
+    let x = numeroAleatorio()
+    if (x == 0) {
+        valorPc = PIEDRA
+    } else {
+        if (x == 1) {
+            valorPc = PAPEL
+        }
+        else {
+            valorPc = TIJERA
+        }
+    }
+    return valorPc
+}
+
+// Función para deshabilitar los botones//
+function deshabilitarBotones() {
+    document.getElementById("piedra").disabled = true;
+    document.getElementById("papel").disabled = true;
+    document.getElementById("tijera").disabled = true;
+}
+
+// funcion seleccionar opcion usuario//
+function obtenerJugadaUsuario(opcion) {
+    valorUsuario = opcion;
+    console.log("El usuario seleccionó: desde la funcion---> " + valorUsuario);
+}
+
+
+// funcion habilitar boton jugar//
+function habilitarJugar() {
+    var jugarBoton = document.getElementById("bjugar");
+    jugarBoton.disabled = false;               // Habilita el botón "Jugar"
+}
+
+// funcion deshabilitar boton jugar//
+function deshabilitarJugar() {  // referencia al botón "Jugar"//
+    var jugarBoton = document.getElementById("bjugar");  //// deshabilita el botón "Jugar"//
+    jugarBoton.disabled = true;
+}
+
+// funcion deshabilitar boton enviar//
+function deshabilitarBotonEnviar() {  //referencia al botón "Jugar"//
+    var enviarBoton = document.getElementById("enviarNombre");  // deshabilita el botón "Jugar"//
+    enviarBoton.disabled = true;
+}
+
+// funcion habilitar todos los botones//
+function habilitarTodosBotones() {
+    document.getElementById("piedra").disabled = false;
+    document.getElementById("papel").disabled = false;
+    document.getElementById("tijera").disabled = false;
+    // document.getElementById("bjugar").disabled = false;
+    document.getElementById("bReinicio").disabled = false;
+    //document.getElementById("enviarNombre").disabled = false;
+
+}
+
+// funcion deshabilitar todos los botones//
+function deshabilitarTodosBotones() {  ////
+    document.getElementById("piedra").disabled = true;
+    document.getElementById("papel").disabled = true;
+    document.getElementById("tijera").disabled = true;
+    document.getElementById("bjugar").disabled = true;
+    //document.getElementById("bReinicio").disabled = true;
+    document.getElementById("enviarNombre").disabled = true;
+}
+
+//funcion cambiar parrafo1
+function cambiarContenidoParrafo1(mensaje) {
+    var Vparrafo1 = document.getElementById("parrafo1");  // elemento de párrafo por su ID//
+    Vparrafo1.innerHTML = mensaje;  // Cambia el contenido del párrafo1//
+}
+
+//funcion cambiar parrafo2
+function cambiarContenidoParrafo2(mensaje) {
+    var Vparrafo2 = document.getElementById("parrafo2");  // elemento de párrafo por su ID//
+    Vparrafo2.innerHTML = mensaje;  // Cambia el contenido del párrafo2//
+}
+
+//funcion cambiar campo usuario
+function cambiarContenidonombreUsuario() {
+    var nUsuario = document.getElementById("nUsuario");  //elemento de párrafo por su ID//
+    nUsuario.innerHTML = usuario;  // Cambiar el contenido del párrafo usuario
+}
+
+//funcion actualizar marcador//
+function actualizarMarcador(ganadosusuario, round, ganadospc) {
+    var marcador1 = document.getElementById("marcador1");  //elemento de párrafo por su ID//
+    marcador1.innerHTML = ganadosusuario;  // Cambiar el contenido// 
+
+    var marcador2 = document.getElementById("marcador2");  //elemento de párrafo por su ID//
+    marcador2.innerHTML = round;  // Cambiar el contenido//
+
+    var marcador3 = document.getElementById("marcador3");  //Obtener el elemento de párrafo por su ID
+    marcador3.innerHTML = ganadospc;  // Cambiar el contenido
+}
+
+//funcion mostrarIconoElegido//
+function mostrarIconoElegido(hd, texto) {
+    var divImagenEleccionJugador = document.getElementById(hd); //referencia al elemento div
+    divImagenEleccionJugador.innerHTML = texto;  // Agrega el código HTML de la imagen al elemento div
+}
+
+//funcion determinar ganador//
+function determinarGanador(eleccionPC, eleccionUsuario) {
+    var ganador
+    if (eleccionPC == TIJERA && eleccionUsuario == PAPEL) {
+        ganador = 1
+    }
+    else if (eleccionUsuario == TIJERA && eleccionPC == PAPEL) {
+        ganador = 2
+    }
+    else if (eleccionPC == TIJERA && eleccionUsuario == PIEDRA) {
+        ganador = 2
+    }
+    else if (eleccionUsuario == TIJERA && eleccionPC == PIEDRA) {
+        ganador = 1
+    }
+    else if (eleccionPC == PIEDRA && eleccionUsuario == PAPEL) {
+        ganador = 2
+    }
+    else if (eleccionUsuario == PIEDRA && eleccionPC == PAPEL) {
+        ganador = 1
+    }
+    else {
+        ganador = 3;
+    }
+    //console.log(ganador + " return antes de salir de la funcion")//
+    ;
+    return ganador;
+}
+
+// escuchador de eventos del boton de ingreso de nombre 
+document.getElementById("enviarNombre").addEventListener("click", function () {   // ejecuta obtenerjugadausuario -->habilita jugar
+    habilitarTodosBotones();
+    console.log(usuario);
+    cambiarContenidonombreUsuario();
+    cambiarContenidoParrafo1("Elija su jugada y presione 'Jugar'.");
+});
+
+
+// escuchador de eventos de los botones p p t 
+document.getElementById("piedra").addEventListener("click", function () {   // ejecuta obtenerjugadausuario -->habilita jugar
+    valorUsuario = PIEDRA;
+    valorPc = obtenerJugadaComputadora()
+    habilitarJugar()
+    console.log(valorPc + "<----valor pc desde funcion asignada a valorpc")
+    mostrarIconoElegido("imagenEleccionJugador", '<img src="Recursos/Piedramini.png">') // funciona
+    mostrarIconoElegido("imagenEleccionPC", '') // reseta imagen elegida pc   
+    cambiarContenidoParrafo1("Elija su jugada y presione 'Jugar'");
+    deshabilitarBotonEnviar();
+});
+document.getElementById("papel").addEventListener("click", function () {
+    valorUsuario = PAPEL;
+    valorPc = obtenerJugadaComputadora()
+    habilitarJugar()
+    console.log(valorPc + "<----- valor pc desde funcion asignada a valorpc")
+    mostrarIconoElegido("imagenEleccionJugador", '<img src="Recursos/papelmini.png">')   // funciona
+    mostrarIconoElegido("imagenEleccionPC", '') // reseta imagen elegida pc
+    cambiarContenidoParrafo1("Elija su jugada y presione 'Jugar'.");
+    deshabilitarBotonEnviar();
+});
+document.getElementById("tijera").addEventListener("click", function () {
+    valorUsuario = TIJERA;
+    valorPc = obtenerJugadaComputadora()
+    habilitarJugar()
+    console.log(valorPc + "<---- valor pc desde funcion asignada a valorpc")
+    mostrarIconoElegido("imagenEleccionJugador", '<img src="Recursos/Tijeramini.png">')   // funciona
+    mostrarIconoElegido("imagenEleccionPC", '') // reseta imagen elegida pc
+    cambiarContenidoParrafo1("Elija su jugada y presione 'Jugar'");
+    deshabilitarBotonEnviar();
+});
+
+// escuchador de eventos del boton Jugar//
+document.getElementById("bjugar").addEventListener("click", function () {
+    deshabilitarJugar();
+    console.log(ganador + "desde el escuchador de eventos");
+   
+
+    //condicional que muestra icono de eleccion de computadora en display
+    if (valorPc == PIEDRA) {
+        mostrarIconoElegido("imagenEleccionPC", '<img src="Recursos/Piedramini.png">')   // funciona
+    } else if (valorPc == PAPEL) {
+        mostrarIconoElegido("imagenEleccionPC", '<img src="Recursos/papelmini.png">')   // funciona
+    } else {
+        mostrarIconoElegido("imagenEleccionPC", '<img src="Recursos/Tijeramini.png">')   // funciona
+    }
+
+    //condicional segun sea el ganador o si hay empate //
+    if (ganador == 1) {
+        console.log("gano pc");
+        contadorPartidosPC++;
+        console.log("Usuario " + contadorPartidosUsuario + " " + "Computadora: " + contadorPartidosPC);
+        contadorRound++
+        actualizarMarcador(contadorPartidosUsuario, contadorRound, contadorPartidosPC)
+        cambiarContenidoParrafo1("Enfrentamiento n° " + contadorRound + ". Ganó la Computadora.");
+        sonidoPierde.play();
+
+    } else if (ganador == 2) {
+        console.log("gano usuario");
+        contadorPartidosUsuario++;
+        console.log("Usuario " + contadorPartidosUsuario + " " + "Computadora: " + contadorPartidosPC);
+        contadorRound++
+        actualizarMarcador(contadorPartidosUsuario, contadorRound, contadorPartidosPC)
+        cambiarContenidoParrafo1("Enfrentamiento n° " + contadorRound + ". Ganó el usuario.");
+        sonidoGana.play();
+
+    } else {
+        console.log("Usuario " + contadorPartidosUsuario + " " + "Computadora: " + contadorPartidosPC);
+        cambiarContenidoParrafo1("Enfrentamiento empatado! por favor elija nuevamente.");
+        sonidoEmpate.play();
+        
+    }
+
+
+    //sonido finish
+if(contadorPartidosUsuario == 2 || contadorPartidosPC == 2){
+    sonidoFinish.play();
+}else{}
+
+//sonido victory
+if(contadorPartidosUsuario == 3 && contadorPartidosPC == 0 ||  contadorPartidosUsuario == 0 && contadorPartidosPC == 3){
+    sonidovictory.play();
+}else{}
+
+
+
+
+    //condicional si llega a 3 partidos ganados //
+    if (contadorPartidosUsuario == 3) {
+        cambiarContenidoParrafo2("¡¡Felicitaciones " + usuario + "!! ha vencido a la computadora.");
+        deshabilitarTodosBotones();
+        sonidoGanador.play();
+    } else if (contadorPartidosPC == 3) {
+        cambiarContenidoParrafo2("¡¡" + usuario + " ha sido derrotado!! La computadora ganó.");
+        deshabilitarTodosBotones()
+        sonidoPerdedor.play()
+    } else {
+    }
+
+});
+
+// escuchador de eventos del boton reiniciar//
+document.getElementById("bReinicio").addEventListener("click", function () {
+    location.reload(); // Esta línea recarga la página
+});

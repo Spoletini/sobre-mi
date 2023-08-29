@@ -1,0 +1,127 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const playerOptions = document.querySelectorAll("#game-options img");
+    const roundResult = document.getElementById("round-result");
+    const playerScore = document.getElementById("player-score");
+    const pcScore = document.getElementById("pc-score");
+    const winnerMessage = document.getElementById("winner-message");
+    const restartButton = document.getElementById("restart-button");
+
+    let playerWins = 0;
+    let pcWins = 0;
+    let round = 0;
+    let juegoTerminado = false; // Variable para rastrear si el juego ha terminado
+
+    let playerName = prompt("Ingresa tu nombre de jugador:");
+
+    while (!isValidName(playerName)) {
+        playerName = prompt("Por favor, ingresa un nombre de jugador válido:");
+    }
+
+    function isValidName(name) {
+        return name.trim() !== "" && name.length <= 20;
+    }
+
+    playerOptions.forEach(option => {
+        option.addEventListener("click", function () {
+            if (!juegoTerminado) { // Verificar si el juego ha terminado
+                round++;
+                const opciones = ["piedra", "papel", "tijera"];
+                const opcionPC = opciones[Math.floor(Math.random() * opciones.length)];
+                const opcionJugador = option.alt.toLowerCase();
+
+                const resultado = determinarGanador(opcionJugador, opcionPC);
+                mostrarResultado(resultado, opcionJugador, opcionPC);
+                actualizarMarcador(resultado);
+            }
+        });
+    });
+
+    restartButton.addEventListener("click", reiniciarJuego);
+
+    function determinarGanador(jugador, pc) {
+        if (jugador === pc) {
+            return "empate";
+        } else if (
+            (jugador === "piedra" && pc === "tijera") ||
+            (jugador === "papel" && pc === "piedra") ||
+            (jugador === "tijera" && pc === "papel")
+        ) {
+            return "jugador";
+        } else {
+            return "pc";
+        }
+    }
+
+    function mostrarResultado(resultado, jugador, pc) {
+        let mensaje = "";
+        if (resultado === "empate") {
+            mensaje = "Empate";
+        } else if (resultado === "jugador") {
+            mensaje = `¡${jugador.toUpperCase()} gana!`;
+        } else {
+            mensaje = `¡${pc.toUpperCase()} gana!`;
+        }
+        roundResult.textContent = mensaje;
+
+        if (playerWins === 3 || pcWins === 3) {
+            mostrarGanador();
+        }
+    }
+
+    function actualizarMarcador(resultado) {
+        if (!juegoTerminado) { // Verificar si el juego ha terminado
+            if (resultado === "jugador") {
+                playerWins++;
+            } else if (resultado === "pc") {
+                pcWins++;
+            }
+            playerScore.textContent = `Jugador: ${playerWins}`;
+            pcScore.textContent = `PC: ${pcWins}`;
+
+            if (playerWins === 3 || pcWins === 3) {
+                juegoTerminado = true; // El juego ha terminado
+                mostrarGanador();
+            }
+        }
+    }
+
+    function mostrarGanador() {
+        if (playerWins === 3) {
+            winnerMessage.textContent = `${playerName} gana el juego.`;
+        } else {
+            winnerMessage.textContent = "El PC gana el juego.";
+        }
+        restartButton.style.display = "block";
+        // Deshabilitar eventos de clic en las opciones del jugador
+        playerOptions.forEach(option => {
+            option.removeEventListener("click", function () {});
+        });
+    }
+
+    function reiniciarJuego() {
+        playerWins = 0;
+        pcWins = 0;
+        round = 0;
+        roundResult.textContent = "";
+        playerScore.textContent = "Jugador: 0";
+        pcScore.textContent = "PC: 0";
+        winnerMessage.textContent = "";
+        restartButton.style.display = "none";
+        juegoTerminado = false; // Reiniciar el juego
+        // Habilitar eventos de clic en las opciones del jugador
+        playerOptions.forEach(option => {
+            option.addEventListener("click", function () {
+                if (!juegoTerminado) {
+                    round++;
+                    const opciones = ["piedra", "papel", "tijera"];
+                    const opcionPC = opciones[Math.floor(Math.random() * opciones.length)];
+                    const opcionJugador = option.alt.toLowerCase();
+    
+                    const resultado = determinarGanador(opcionJugador, opcionPC);
+                    mostrarResultado(resultado, opcionJugador, opcionPC);
+                    actualizarMarcador(resultado);
+                }
+            });
+        });
+    }
+});

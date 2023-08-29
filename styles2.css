@@ -1,0 +1,199 @@
+/* CSS HEX paleta de colores a utilizar
+--cerulean: #0081a7ff; azul oscuro
+--verdigris: #00afb9ff; azul medio
+--light-yellow: #fdfcdcff;crema
+--light-orange: #fed9b7ff; naranja
+--bittersweet: #f07167ff; rojo*/
+
+
+body {
+    /*border: 5px solid #fed9b7ff;*/
+    background-color: #fdfcdcff;
+    border-radius: 30px;
+    font-family: 'Josefin Sans', sans-serif;
+    text-align: center;
+    align-items: center;
+    font-size: 1.3em;
+}
+
+#marcador {
+    border: 5px solid #f07167;
+    border-radius: 30px;
+    background-color: #0081a7ff;
+    text-align: center;
+    padding: 10px;
+    max-width: 650px;
+    margin: 7px auto;
+    color: #fdfcdcff;
+
+}
+
+#principal {
+    border: 5px solid #f07167;
+    border-radius: 30px;
+    background-color: #00afb9ff;
+    text-align: center;
+    padding: 10px;
+    max-width: 650px;
+    margin: auto;
+
+}
+
+div {
+    /*border: solid yellow 1px;*/
+    border-radius: 5px;
+}
+
+.inline {
+    display: inline-block;
+}
+
+#displayEleccion {
+    max-width: 800px;
+    max-height: 800px;
+    padding: 5px;
+}
+
+.cajaEleccion {
+    width: 150px;
+    height: 150px;
+    margin: auto;
+
+    padding: 5px;
+}
+
+#bReinicio {
+    background-color: #f07167ff;
+    width: 100px;
+    height: 20px;
+    border-radius: 15px;
+    position: relative;
+    left: 180px;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+#bjugar {
+    width: 380px;
+    height: 50px;
+    margin: 10px;
+    background-color: #f07167ff;
+    border-radius: 10px;
+    font-size: 1.5em;
+    font-family: 'Josefin Sans', sans-serif;
+    border: none;
+}
+
+.botones {
+    background-color: transparent;
+    /*Fondo transparente */
+    border: none;
+    /* Fondo transparente */
+    margin: 5px;
+}
+
+.cajasmarcador {
+    display: inline-block;
+    width: 180px;
+    height: 50px;
+    background-color: #f07167ff;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+
+#usuario {
+    width: 300px;
+    height: 30px;
+    margin: 10px;
+    border: 3px solid #fed9b7ff;
+    border-radius: 10px;
+    text-align: center;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.8em;
+    background-color: rgb(253, 253, 247);
+    color: #302d2d;
+}
+
+#enviarNombre {
+    width: 100px;
+    height: 35px;
+    margin: 5px;
+    border: 3px solid #fed9b7ff;
+    border-radius: 10px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.8em;
+    background-color:  rgb(253, 253, 247);
+    color: #302d2d;
+}
+
+button:hover {
+    background-color: rgb(218, 203, 121);
+}
+
+#textoEleccionJugador {
+    font-size: 0.8em;
+    color: #302d2d;
+}
+
+#textoEleccionPC {
+    font-size: 0.8em;
+    color: #302d2d;
+}
+
+hr {
+    color: #f07167;
+}
+
+.nUsuario {
+    margin: 5px;
+    padding: 0px;
+}
+
+#nRound {
+    padding: 0;
+    color: #fed9b7ff;
+    margin: auto,
+}
+
+#marcador2 {
+    text-align: center;
+    color: #fed9b7ff;
+}
+
+h5 {
+    text-align: center;
+}
+
+.cajasmarcador1 {
+    display: inline-block;
+    width: 70px;
+    height: 50px;
+    color: black;
+    margin: auto;
+    padding: auto;
+    text-align: center;
+}
+
+#cajaUsuario {
+    border: solid #f07167 2px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#cajaPC {
+    border: solid #f07167 2px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#displayMensaje {
+    margin: 0px;
+    padding: 0px;
+}
+
+#parrafo1{
+    color: #302d2d;
+}
+#parrafo2{
+    color: #302d2d;
+}
